@@ -1,1 +1,11 @@
-placeholder
+node_modules/
+.env
+.env.*
+venv/
+.venv/
+__pycache__/
+*.pyc
+dist/
+build/
+.vscode/
+.idea/
