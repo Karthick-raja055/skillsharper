@@ -3,11 +3,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class Config:
-    SECRET_KEY = "skillsharper_secret"
 
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:raja1234@localhost/skillsharper"
+class Config:
+    SECRET_KEY = os.getenv(
+        "SECRET_KEY",
+        "skillsharper_secret"
+    )
+
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        "DATABASE_URL"
+    )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    JWT_SECRET_KEY = "jwt_secret_key"
+    JWT_SECRET_KEY = os.getenv(
+        "JWT_SECRET_KEY",
+        "jwt_secret_key"
+    )
