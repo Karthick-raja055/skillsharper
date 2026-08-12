@@ -5,14 +5,23 @@ load_dotenv()
 
 
 class Config:
-    SECRET_KEY = os.getenv(
-        "SECRET_KEY",
-        "skillsharper_secret"
-    )
+    SECRET_KEY = os.getenv("SECRET_KEY", "skillsharper_secret")
 
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        "DATABASE_URL"
-    )
+    DATABASE_URL = os.getenv("DATABASE_URL")
+
+    if DATABASE_URL:
+        if DATABASE_URL.startswith("postgres://"):
+            DATABASE_URL = DATABASE_URL.replace(
+                "postgres://",
+                "postgresql://",
+                1
+            )
+
+        SQLALCHEMY_DATABASE_URI = DATABASE_URL
+    else:
+        SQLALCHEMY_DATABASE_URI = (
+            "mysql+pymysql://root:raja1234@localhost/skillsharper"
+        )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
